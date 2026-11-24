@@ -1,0 +1,22 @@
+const { Router } = require('express');
+const { requireAccess } = require('./middlewares/require-access');
+const { authRoutes } = require('./features/auth/auth.routes');
+const { staffRoutes } = require('./features/staff/staff.routes');
+const { categoriesRoutes } = require('./features/categories/categories.routes');
+const { authorsRoutes } = require('./features/authors/authors.routes');
+const { booksRoutes } = require('./features/books/books.routes');
+const { readersRoutes } = require('./features/readers/readers.routes');
+const { loansRoutes } = require('./features/loans/loans.routes');
+const { reportsRoutes } = require('./features/reports/reports.routes');
+
+const router = Router();
+router.use('/auth', authRoutes);
+router.use(requireAccess);
+router.use('/user', staffRoutes);
+router.use('/categories', categoriesRoutes);
+router.use('/authors', authorsRoutes);
+router.use('/books', booksRoutes);
+router.use('/readers', readersRoutes);
+router.use('/loans', loansRoutes);
+router.use('/reports', reportsRoutes);
+module.exports = { apiRoutes: router };

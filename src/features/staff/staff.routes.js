@@ -1,0 +1,14 @@
+const { Router } = require('express');
+const controller = require('./staff.controller');
+const { asyncRoute } = require('../../shared/async-route');
+const { requireAdministrator } = require('../../middlewares/require-access');
+const router = Router();
+router.use(requireAdministrator);
+router.get('/', asyncRoute(controller.list));
+router.post('/', asyncRoute(controller.create));
+router.put('/:id', asyncRoute(controller.update));
+router.patch('/:id', asyncRoute(controller.update));
+router.delete('/:id', asyncRoute(controller.remove));
+router.put('/:id/active', asyncRoute(controller.active));
+router.patch('/:id/active', asyncRoute(controller.active));
+module.exports = { staffRoutes: router };
